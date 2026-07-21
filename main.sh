@@ -64,16 +64,19 @@ setup_timezone() {
 # 3. ขอโดเมน
 # ============================================
 setup_domain() {
-    if [[ -f /root/domain && -n "$(cat /root/domain 2>/dev/null)" ]]; then
-        print_ok "โดเมนปัจจุบัน: $(cat /root/domain)"
-    else
-        echo ""
-        read -p "  ➜ ใส่โดเมน (เช่น app.idavpn.win): " SUB_DOMAIN
-        [[ -z "$SUB_DOMAIN" ]] && { print_error "ไม่ได้ใส่โดเมน"; exit 1; }
-        echo "$SUB_DOMAIN" > /root/domain
-        print_ok "โดเมน: $SUB_DOMAIN"
-    fi
+    # ลบไฟล์เก่าเพื่อบังคับถามใหม่ทุกครั้ง
+    rm -f /root/domain /etc/xray/domain 2>/dev/null
+    echo ""
+    echo -e "${YELLOW}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
+    echo -e "${YELLOW}  กรุณากรอกโดเมนของคุณ${NC}"
+    echo -e "${YELLOW}  เช่น app.idavpn.win${NC}"
+    echo -e "${YELLOW}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
+    echo ""
+    read -p "  ➜ ใส่โดเมน: " SUB_DOMAIN
+    [[ -z "$SUB_DOMAIN" ]] && { print_error "ไม่ได้ใส่โดเมน"; exit 1; }
+    echo "$SUB_DOMAIN" > /root/domain
     cp /root/domain /etc/xray/domain 2>/dev/null
+    print_ok "โดเมน: $SUB_DOMAIN"
 }
 
 # ============================================
