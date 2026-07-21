@@ -204,6 +204,8 @@ WantedBy=multi-user.target
 EOF
     fi
     wget -q -O /etc/websocket/tun.conf "${REPO}/admin/tun.conf" 2>/dev/null
+    wget -q -O /etc/systemd/system/ws.service "${REPO}/admin/ws.service" 2>/dev/null
+    chmod +x /usr/sbin/websocket 2>/dev/null
     
     # --- OpenVPN ---
     print_info "ตั้งค่า OpenVPN ..."
@@ -247,6 +249,12 @@ download_scripts() {
     wget -q -O /usr/local/bin/ssh-admin "${REPO}/admin/ssh-admin" 2>/dev/null
     chmod +x /usr/local/bin/ssh-admin 2>/dev/null
     print_ok "ssh-admin"
+    
+    # ws-ssh.py for SSH WS port 8080
+    wget -q -O /usr/local/bin/ws-ssh.py "${REPO}/admin/ws-ssh.py" 2>/dev/null
+    chmod +x /usr/local/bin/ws-ssh.py 2>/dev/null
+    wget -q -O /etc/systemd/system/ws-ssh.service "${REPO}/admin/ws-ssh.service" 2>/dev/null
+    print_ok "ws-ssh.py (SSH WS port 8080)"
     
     print_ok "Scripts พร้อม"
 }
