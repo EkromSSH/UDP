@@ -42,7 +42,7 @@ install_packages() {
     
     apt update -y
     apt upgrade -y
-    apt install -y wget curl screen git unzip zip 7zip python3 python3-pip \\
+    apt install -y wget curl screen git unzip zip p7zip-full python3 python3-pip \\
         nginx haproxy apache2-utils squid dropbear fail2ban \\
         openssl net-tools iptables-persistent netfilter-persistent \\
         cron socat cmake make gcc build-essential libssl-dev \\
